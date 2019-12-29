@@ -4,47 +4,50 @@ import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { set_text_filter } from "../../../actions/filters";
 
-const ExpenseFilters = ({ values, errors, touched }) => {
-  return (
-    <div>
-      <div className="row">
-        <div className="col m12">
-          <Form>
-            <div className="row">
-              <div className="col m6">
-                <div className="input-field">
-                  <Field
-                    type="text"
-                    name="search_text"
-                    className={
-                      touched.search_text && errors.search_text && "invalid"
-                    }
-                  />
-                  <label htmlFor="search_text" type="text" className="active">
-                    Search
-                  </label>
-                  {touched.search_text && errors.search_text && (
-                    <span className="helper-text error-helper">
-                      {errors.search_text}
-                    </span>
-                  )}
+class ExpenseFilters extends Component {
+  render() {
+    const { values, errors, touched } = this.props;
+    return (
+      <div>
+        <div className="row mt-25">
+          <div className="col m12">
+            <Form>
+              <div className="row">
+                <div className="col m6">
+                  <div className="input-field">
+                    <Field
+                      type="text"
+                      name="search_text"
+                      className={
+                        touched.search_text && errors.search_text && "invalid"
+                      }
+                    />
+                    <label htmlFor="search_text" type="text" className="active">
+                      Search
+                    </label>
+                    {touched.search_text && errors.search_text && (
+                      <span className="helper-text error-helper">
+                        {errors.search_text}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row">
-              <div className="col m6">
-                <button type="submit" className="btn right blue">
-                  Search
-                  <i className="material-icons custom-icon">search</i>
-                </button>
+              <div className="row">
+                <div className="col m6">
+                  <button type="submit" className="btn right green">
+                    <span>Search</span>
+                    <i className="material-icons custom-icon">search</i>
+                  </button>
+                </div>
               </div>
-            </div>
-          </Form>
+            </Form>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const Formik = withFormik({
   mapPropsToValues({ search_text }) {
@@ -53,7 +56,7 @@ const Formik = withFormik({
     };
   },
   validationSchema: Yup.object().shape({
-    search_text: Yup.string().required()
+    search_text: Yup.string()
   }),
   handleSubmit(values, props) {
     const { search_text } = values;

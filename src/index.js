@@ -7,6 +7,13 @@ import Router from './router';
 import "materialize-css/dist/css/materialize.min.css";
 import "./assets/scss/index.scss";
 
+
+
+import {create_expense, get_expenses} from './actions/expenses';
+import {set_text_filter} from './actions/filters';
+
+
+
 import reducers from "./reducers";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -14,12 +21,6 @@ const store = createStore(
   reducers,
   composeEnhancers(applyMiddleware(reduxThunk))
 );
-
-
-import {create_expense} from './actions/expenses';
-store.dispatch(create_expense({ description: 'water'}));
-
-
 
 ReactDOM.render(
   <Provider store={store}>

@@ -8,7 +8,7 @@ import {
 
 const INITIAL_STATE = {
   text: "",
-  sort_by: "date",
+  sort_by: "amount",
   start_date: undefined,
   end_date: undefined
 };

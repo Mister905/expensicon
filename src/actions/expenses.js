@@ -2,15 +2,25 @@ import {
   GET_EXPENSES,
   CREATE_EXPENSE,
   UPDATE_EXPENSE,
-  DELETE_EXPENSE
+  DELETE_EXPENSE,
+  GET_EXPENSE
 } from "./types";
 import uuid from "uuid";
 
 export const get_expenses = (expenses, filters) => {
   const { text, sort_by, start_date, end_date } = filters;
-  /* We first check if the start_date/end_date is not a number because if it's not then the dates haven't been set yet so we can show all of the expenses.
-    If start_date/end_date have been set then we check to see if the expense's created_at time is greater than the start_date and less than the end_date. If it is then we show it, if not then we hide it. */
-  if (expenses.length > 0) {
+  /* check if the start_date/end_date is not a number. if it's not then 
+    the dates haven't been set yet so we can show all of the expenses.
+    If start_date/end_date have been set then we check to see if the expense's 
+    created_at time is greater than the start_date and less than the end_date. 
+    If it is then we show it, if not then we hide it. 
+    
+    timestamps (milliseconds)
+    January 1 1970 (unix epoch)
+    negative numbers milliseconds before epoch / positive numbers milliseconds after epoch   
+  */
+
+  try {
     const filtered_expenses = expenses
       .filter(expense => {
         const start_date_match =
@@ -34,13 +44,15 @@ export const get_expenses = (expenses, filters) => {
       type: GET_EXPENSES,
       payload: filtered_expenses
     };
-  } else {
-    return {
-      type: GET_EXPENSES,
-      payload: []
-    };
+  } catch (error) {
+    console.log(error);
   }
 };
+
+export const get_expense = expense_id => ({
+  type: GET_EXPENSE,
+  payload: expense_id
+});
 
 export const create_expense = form_values => {
   const { description, amount, note } = form_values;
@@ -50,7 +62,8 @@ export const create_expense = form_values => {
       id: uuid(),
       description,
       amount,
-      note
+      note,
+      created_at: Date.now()
     }
   };
 };
@@ -60,7 +73,7 @@ export const update_expense = (expense_id, form_values) => ({
   payload: { expense_id, form_values }
 });
 
-export const delete_expense = expense_id => ({
-  type: DELETE_EXPENSE,
-  payload: expense_id
-});
+export const delete_expense = (expense_id, history) => async dispatch => {
+  dispatch({ type: DELETE_EXPENSE, payload: expense_id });
+  history.push("/");
+};
