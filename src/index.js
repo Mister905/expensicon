@@ -15,6 +15,12 @@ const store = createStore(
   composeEnhancers(applyMiddleware(reduxThunk))
 );
 
+
+import {create_expense} from './actions/expenses';
+store.dispatch(create_expense({ description: 'water'}));
+
+
+
 ReactDOM.render(
   <Provider store={store}>
     <Router />

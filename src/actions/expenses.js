@@ -1,4 +1,9 @@
-import { GET_EXPENSES, CREATE_EXPENSE, UPDATE_EXPENSE, DELETE_EXPENSE } from "./types";
+import {
+  GET_EXPENSES,
+  CREATE_EXPENSE,
+  UPDATE_EXPENSE,
+  DELETE_EXPENSE
+} from "./types";
 import uuid from "uuid";
 
 export const get_expenses = (expenses, filters) => {
@@ -25,25 +30,30 @@ export const get_expenses = (expenses, filters) => {
         }
       });
 
-      return {
-        type: GET_EXPENSES,
-        payload: filtered_expenses
-      }
+    return {
+      type: GET_EXPENSES,
+      payload: filtered_expenses
+    };
   } else {
     return {
       type: GET_EXPENSES,
       payload: []
-    }
+    };
   }
 };
 
-export const create_expense = form_values => ({
-  type: CREATE_EXPENSE,
-  payload: {
-    id: uuid(),
-    form_values
-  }
-});
+export const create_expense = form_values => {
+  const { description, amount, note } = form_values;
+  return {
+    type: CREATE_EXPENSE,
+    payload: {
+      id: uuid(),
+      description,
+      amount,
+      note
+    }
+  };
+};
 
 export const update_expense = (expense_id, form_values) => ({
   type: UPDATE_EXPENSE,

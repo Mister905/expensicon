@@ -23,7 +23,7 @@ class Header extends Component {
               {/* https://stackoverflow.com/a/8577887 */}
               <li className="height-100 custom-nav-li">
                 <NavLink
-                  to="/expense/create"
+                  to="/expenses/create"
                   activeClassName="active"
                   className="height-100"
                 >
