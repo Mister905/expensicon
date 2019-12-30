@@ -13,6 +13,7 @@ class ExpenseCreate extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     if (prevProps.values.note !== this.props.values.note) {
+      console.log(this.note_textarea.current)
       M.textareaAutoResize(this.note_textarea.current);
     }
   };
@@ -27,7 +28,7 @@ class ExpenseCreate extends Component {
           </div>
         </div>
         <Form>
-          <div className="row">
+          <div className="row mt-25">
             <div className="col m6 offset-m3">
               <div className="input-field">
                 <Field
@@ -106,9 +107,8 @@ class ExpenseCreate extends Component {
           </div>
           <div className="row">
             <div className="col m6 offset-m3">
-              <button type="submit" className="btn right blue">
-                Search
-                <i className="material-icons custom-icon">search</i>
+              <button type="submit" className="btn right green">
+                Create
               </button>
             </div>
           </div>

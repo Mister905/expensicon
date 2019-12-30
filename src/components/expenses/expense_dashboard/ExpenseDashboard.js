@@ -7,10 +7,10 @@ class ExpenseDashboard extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col m6">
+          <div className="col m3 offset-m1">
             <ExpenseFilters />
           </div>
-          <div className="col m6">
+          <div className="col m6 offset-m1">
             <ExpenseList />
           </div>
         </div>

@@ -11,6 +11,14 @@ class ExpenseList extends Component {
     this.props.get_expenses(expenses, filters);
   };
 
+  componentDidUpdate = prevProps => {
+    if (prevProps.filters.text !== this.props.filters.text) {
+      const { expenses } = this.props.expenses;
+      const { filters } = this.props;
+      this.props.get_expenses(expenses, filters);
+    }
+  };
+
   render_expense_list = () => {
     const { loading_expenses } = this.props.expenses;
     const { expenses } = this.props.expenses;
@@ -44,7 +52,7 @@ class ExpenseList extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col m12">
+          <div className="col m12 center-align">
             <h1>Expense List</h1>
           </div>
         </div>
