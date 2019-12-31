@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
-import M from "materialize-css";
+import M, { Datepicker } from "materialize-css";
 import { create_expense } from "../../../actions/expenses";
 import { Link } from "react-router-dom";
 import CurrencyInput from "../../utils/currency_input/CurrencyInput";
+import moment from "moment";
+import DateInput from '../../utils/date_input/DateInput';
+
 
 class ExpenseCreate extends Component {
   constructor(props) {
@@ -19,12 +22,12 @@ class ExpenseCreate extends Component {
     }
   };
 
-  on_amount_change = e => {
-    this.props.setFieldValue("amount", e.target.value)
-  };
+  validate_derp = (e) => {
+    console.log(e)
+  }
 
   render() {
-    const { errors, touched, setFieldValue } = this.props;
+    const { errors, touched, setFieldValue, handleBlur } = this.props;
 
     return (
       <div>
@@ -74,18 +77,17 @@ class ExpenseCreate extends Component {
                 <Field
                   name="amount"
                   component={CurrencyInput}
-                  onChange={e => this.on_amount_change(e)}
                 />
                 <label
                   htmlFor="amount"
                   className={
                     "active" +
-                    (touched.amount && errors.amount ? " error-label" : "")
+                    (errors.amount ? " error-label" : "")
                   }
                 >
                   Amount
                 </label>
-                {touched.amount && errors.amount && (
+                {errors.amount && (
                   <span className="helper-text error-helper">
                     {errors.amount}
                   </span>
@@ -118,6 +120,11 @@ class ExpenseCreate extends Component {
           </div>
           <div className="row">
             <div className="col m4 offset-m4">
+              <DateInput />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col m4 offset-m4">
               <button type="submit" className="btn right green">
                 Create
                 <i className="material-icons custom-icon">add</i>
@@ -135,12 +142,15 @@ const Formik = withFormik({
     return {
       description: "",
       amount: "",
-      note: ""
+      note: "",
+      created_at: moment()
     };
   },
+  validateOnBlur: false,
+  validateOnChange: false,
   validationSchema: Yup.object().shape({
-    description: Yup.string().required(),
-    amount: Yup.string().required()
+    description: Yup.string().required().label('Description'),
+    amount: Yup.string().required().label('Amount')
   }),
   handleSubmit(values, props) {
     props.props.create_expense(values, props.props.history);
