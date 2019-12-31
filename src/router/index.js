@@ -13,15 +13,17 @@ import ExpenseView from "../components/expenses/expense_view/ExpenseView";
 const Router = () => (
   <BrowserRouter>
     <Header />
-    <Switch>
-      <Route path="/" component={ExpenseDashboard} exact />
-      <Route path="/expenses" component={ExpenseDashboard} exact />
-      <Route path="/expenses/create" component={ExpenseCreate} exact />
-      <Route path="/expenses/:id" component={ExpenseView} exact />
-      <Route path="/expenses/edit/:id" component={ExpenseEdit} exact />
-      <Route path="/help" component={Help} exact />
-      <Route component={NotFound} exact />
-    </Switch>
+    <div className="custom-container">
+      <Switch>
+        <Route path="/" component={ExpenseDashboard} exact />
+        <Route path="/expenses" component={ExpenseDashboard} exact />
+        <Route path="/expenses/create" component={ExpenseCreate} exact />
+        <Route path="/expenses/:id" component={ExpenseView} exact />
+        <Route path="/expenses/edit/:id" component={ExpenseEdit} exact />
+        <Route path="/help" component={Help} exact />
+        <Route component={NotFound} exact />
+      </Switch>
+    </div>
   </BrowserRouter>
 );
 

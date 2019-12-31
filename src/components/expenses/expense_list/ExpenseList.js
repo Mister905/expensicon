@@ -52,8 +52,13 @@ class ExpenseList extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col m12 center-align">
-            <h1>Expense List</h1>
+          <div className="col m8 offset-m2 center-align">
+            <div className="component-heading">Expense List</div>
+          </div>
+          <div className="col m2 center-align">
+            <Link to={"/expenses/create"} className="btn green">
+              Create <i className="material-icons custom-icon">add</i>
+            </Link>
           </div>
         </div>
         {this.render_expense_list()}

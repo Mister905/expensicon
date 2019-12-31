@@ -12,14 +12,14 @@ const INITIAL_STATE = {
       id: "gfsadf7892342fswa",
       description: "January Rent",
       note: "afsadlkjk;lsaflk",
-      amount: 500,
+      amount: "$69",
       created_at: Date.now()
     },
     {
       id: "fdsasdfsadfgdfsgreqr",
       description: "March Rent",
       note: "kjlkhjkhaflk",
-      amount: 100,
+      amount: "$88",
       created_at: Date.now()
     }
   ],
@@ -44,8 +44,8 @@ export default (state = INITIAL_STATE, action) => {
         expenses: [...state.expenses, payload]
       };
     case UPDATE_EXPENSE:
-      return state.expenses.map(expense => {
-        if (expense.id === payload.expense_id) {
+      const updated_expenses = state.expenses.map(expense => {
+        if (expense.id === payload.id) {
           return {
             ...expense,
             ...payload
@@ -54,6 +54,11 @@ export default (state = INITIAL_STATE, action) => {
           return expense;
         }
       });
+      return {
+        ...state,
+        expenses: updated_expenses
+      };
+
     case DELETE_EXPENSE:
       return {
         ...state,

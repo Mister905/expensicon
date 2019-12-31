@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
 import M from "materialize-css";
-import { create_expense } from '../../../actions/expenses';
+import { create_expense } from "../../../actions/expenses";
+import { Link } from "react-router-dom";
+import CurrencyInput from "../../utils/currency_input/CurrencyInput";
 
 class ExpenseCreate extends Component {
   constructor(props) {
@@ -13,23 +15,32 @@ class ExpenseCreate extends Component {
 
   componentDidUpdate = (prevProps, prevState) => {
     if (prevProps.values.note !== this.props.values.note) {
-      console.log(this.note_textarea.current)
       M.textareaAutoResize(this.note_textarea.current);
     }
   };
 
+  on_amount_change = e => {
+    this.props.setFieldValue("amount", e.target.value)
+  };
+
   render() {
-    const { values, errors, touched } = this.props;
+    const { errors, touched, setFieldValue } = this.props;
+
     return (
       <div>
-        <div className="row mt-25">
-          <div className="col m12 center-align">
-            <h1>Create Expense</h1>
+        <div className="row">
+          <div className="col m2 offset-m2 center-align">
+            <Link to={"/"} className="btn green">
+              <i className="material-icons custom-icon">arrow_back</i>
+            </Link>
+          </div>
+          <div className="col m4 center-align">
+            <div className="component-heading">Create Expense</div>
           </div>
         </div>
         <Form>
-          <div className="row mt-25">
-            <div className="col m6 offset-m3">
+          <div className="row">
+            <div className="col m4 offset-m4">
               <div className="input-field">
                 <Field
                   type="text"
@@ -58,12 +69,12 @@ class ExpenseCreate extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col m6 offset-m3">
+            <div className="col m4 offset-m4">
               <div className="input-field">
                 <Field
-                  type="number"
                   name="amount"
-                  className={touched.amount && errors.amount && "invalid"}
+                  component={CurrencyInput}
+                  onChange={e => this.on_amount_change(e)}
                 />
                 <label
                   htmlFor="amount"
@@ -83,7 +94,7 @@ class ExpenseCreate extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col m6 offset-m3">
+            <div className="col m4 offset-m4">
               <div className="input-field">
                 <Field
                   component="textarea"
@@ -106,9 +117,10 @@ class ExpenseCreate extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col m6 offset-m3">
+            <div className="col m4 offset-m4">
               <button type="submit" className="btn right green">
                 Create
+                <i className="material-icons custom-icon">add</i>
               </button>
             </div>
           </div>
@@ -119,20 +131,20 @@ class ExpenseCreate extends Component {
 }
 
 const Formik = withFormik({
-  mapPropsToValues({ description, amount, note }) {
+  mapPropsToValues(props) {
     return {
-      description: description || "",
-      amount: amount || "",
-      note: note || ""
+      description: "",
+      amount: "",
+      note: ""
     };
   },
   validationSchema: Yup.object().shape({
     description: Yup.string().required(),
-    amount: Yup.number().required()
+    amount: Yup.string().required()
   }),
   handleSubmit(values, props) {
-    props.props.create_expense(values);
+    props.props.create_expense(values, props.props.history);
   }
 })(ExpenseCreate);
 
-export default connect(null, {create_expense})(Formik);
+export default connect(null, { create_expense })(Formik);

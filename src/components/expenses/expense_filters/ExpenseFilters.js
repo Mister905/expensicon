@@ -24,7 +24,6 @@ class ExpenseFilters extends Component {
 
   handle_select_filter_change = e => {
     const { value } = e.target;
-    console.log(value);
     if (value == "date") {
       this.props.sort_by_date();
     } else if (value == "amount") {
@@ -36,9 +35,9 @@ class ExpenseFilters extends Component {
     const { values, errors, touched, handleChange } = this.props;
     return (
       <div>
-        <div className="row mt-25">
+        <div className="row">
           <div className="col m12 center-align">
-            <h2>Filter Expenses</h2>
+            <div className="component-heading">Filter Expenses</div>
           </div>
         </div>
         <Form>

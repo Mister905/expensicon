@@ -8,7 +8,6 @@
 
 .custom-icon {
     vertical-align: bottom;
-    margin-left: 5px;
 }
 
 .mt-25 {
@@ -21,4 +20,21 @@
 
 .error-label {
     color: #F44336 !important
+}
+
+.custom-container {
+    margin-top: 50px;
+}
+
+.component-heading {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.btn-edit {
+    min-width: 80px !important;
+}
+
+.update-icon {
+    margin-left: 5px;
 }

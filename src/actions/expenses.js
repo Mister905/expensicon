@@ -54,9 +54,9 @@ export const get_expense = expense_id => ({
   payload: expense_id
 });
 
-export const create_expense = form_values => {
+export const create_expense = (form_values, history) => async dispatch => {
   const { description, amount, note } = form_values;
-  return {
+  dispatch({
     type: CREATE_EXPENSE,
     payload: {
       id: uuid(),
@@ -65,13 +65,15 @@ export const create_expense = form_values => {
       note,
       created_at: Date.now()
     }
-  };
+  });
+  history.push("/");
 };
 
-export const update_expense = (expense_id, form_values) => ({
-  type: UPDATE_EXPENSE,
-  payload: { expense_id, form_values }
-});
+export const update_expense = (expense_id, form_values, history) => async dispatch => {
+ 
+  dispatch({ type: UPDATE_EXPENSE, payload: { id: expense_id, ...form_values} })
+  history.push(`/expenses/${expense_id}`);
+}
 
 export const delete_expense = (expense_id, history) => async dispatch => {
   dispatch({ type: DELETE_EXPENSE, payload: expense_id });
