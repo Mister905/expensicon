@@ -6,14 +6,13 @@ import M, { Datepicker } from "materialize-css";
 import { create_expense } from "../../../actions/expenses";
 import { Link } from "react-router-dom";
 import CurrencyInput from "../../utils/currency_input/CurrencyInput";
-import moment from "moment";
-import DateInput from '../../utils/date_input/DateInput';
-
+import DateInput from "../../utils/date_input/DateInput";
 
 class ExpenseCreate extends Component {
   constructor(props) {
     super(props);
     this.note_textarea = React.createRef();
+    this.note_label = React.createRef();
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -22,13 +21,9 @@ class ExpenseCreate extends Component {
     }
   };
 
-  validate_derp = (e) => {
-    console.log(e)
-  }
-
   render() {
-    const { errors, touched, setFieldValue, handleBlur } = this.props;
-
+    const { errors } = this.props;
+    console.log(errors);
     return (
       <div>
         <div className="row">
@@ -45,25 +40,18 @@ class ExpenseCreate extends Component {
           <div className="row">
             <div className="col m4 offset-m4">
               <div className="input-field">
-                <Field
-                  type="text"
-                  name="description"
+                <span
                   className={
-                    touched.description && errors.description && "invalid"
-                  }
-                />
-                <label
-                  htmlFor="description"
-                  className={
-                    "active" +
-                    (touched.description && errors.description
-                      ? " error-label"
-                      : "")
+                    "custom-label" + (errors.description ? " error-label" : "")
                   }
                 >
                   Description
-                </label>
-                {touched.description && errors.description && (
+                </span>
+                <Field
+                  name="description"
+                  className={errors.description && "invalid"}
+                />
+                {errors.description && (
                   <span className="helper-text error-helper">
                     {errors.description}
                   </span>
@@ -74,19 +62,14 @@ class ExpenseCreate extends Component {
           <div className="row">
             <div className="col m4 offset-m4">
               <div className="input-field">
-                <Field
-                  name="amount"
-                  component={CurrencyInput}
-                />
-                <label
-                  htmlFor="amount"
+                <span
                   className={
-                    "active" +
-                    (errors.amount ? " error-label" : "")
+                    "custom-label" + (errors.description ? " error-label" : "")
                   }
                 >
                   Amount
-                </label>
+                </span>
+                <Field name="amount" component={CurrencyInput} />
                 {errors.amount && (
                   <span className="helper-text error-helper">
                     {errors.amount}
@@ -98,29 +81,26 @@ class ExpenseCreate extends Component {
           <div className="row">
             <div className="col m4 offset-m4">
               <div className="input-field">
+                <span
+                  className="custom-label"
+                >
+                  Notes
+                </span>
                 <Field
                   component="textarea"
                   name="note"
                   innerRef={this.note_textarea}
-                  className={
-                    `materialize-textarea ` +
-                    (touched.note && errors.note ? "invalid" : "")
-                  }
+                  className='materialize-textarea'
                 />
-                <label htmlFor="note" className="active">
-                  Note
-                </label>
-                {touched.note && errors.note && (
-                  <span className="helper-text error-helper">
-                    {errors.note}
-                  </span>
-                )}
               </div>
             </div>
           </div>
           <div className="row">
             <div className="col m4 offset-m4">
-              <DateInput />
+              <Field
+                name="created_at"
+                component={DateInput}
+              />
             </div>
           </div>
           <div className="row">
@@ -142,15 +122,18 @@ const Formik = withFormik({
     return {
       description: "",
       amount: "",
-      note: "",
-      created_at: moment()
+      note: ""
     };
   },
   validateOnBlur: false,
   validateOnChange: false,
   validationSchema: Yup.object().shape({
-    description: Yup.string().required().label('Description'),
-    amount: Yup.string().required().label('Amount')
+    description: Yup.string()
+      .required()
+      .label("Description"),
+    amount: Yup.string()
+      .required()
+      .label("Amount")
   }),
   handleSubmit(values, props) {
     props.props.create_expense(values, props.props.history);

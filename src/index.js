@@ -3,16 +3,9 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import reduxThunk from "redux-thunk";
-import Router from './router';
+import Router from "./router";
 import "materialize-css/dist/css/materialize.min.css";
 import "./assets/scss/index.scss";
-
-
-
-import {create_expense, get_expenses} from './actions/expenses';
-import {set_text_filter} from './actions/filters';
-
-
 
 import reducers from "./reducers";
 

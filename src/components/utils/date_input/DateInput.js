@@ -1,21 +1,35 @@
-import React from "react";
-import 'react-dates/initialize';
-import { SingleDatePicker } from 'react-dates';
+import React, { Component } from "react";
+import "react-dates/initialize";
+import "react-dates/lib/css/_datepicker.css";
+import { SingleDatePicker } from "react-dates";
+import moment from "moment";
 
-const DateInput = props => {
-    // console.log(props)
-  return (
-    <div>
-        derp
-      {/* <SingleDatePicker
-        date={this.state.date} // momentPropTypes.momentObj or null
-        onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
-        focused={this.state.focused} // PropTypes.bool
-        onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-        id="your_unique_id" // PropTypes.string.isRequired,
-      /> */}
-    </div>
-  );
-};
+class DateInput extends Component {
+  state = {
+    focused: false
+  };
+
+  on_date_change = date => {
+    console.log("derp");
+  };
+
+  on_focus_change = props => {
+    console.log(props);
+  };
+
+  render() {
+    return (
+      <div>
+        <SingleDatePicker
+          date={moment()} // momentPropTypes.momentObj or null
+          onDateChange={date => this.on_date_change(date)} // PropTypes.func.isRequired
+          focused={this.state.focused} // PropTypes.bool
+          onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+          id="your_unique_id"
+        />
+      </div>
+    );
+  }
+}
 
 export default DateInput;
