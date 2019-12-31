@@ -16,9 +16,10 @@ const defaultMaskOptions = {
 };
 
 const CurrencyInput = props => {
+  const { amount } = props.form.values;
+  const { setFieldValue } = props.form;
   const currencyMask = createNumberMask(defaultMaskOptions);
-  const { value } = props.field;
-  return <MaskedInput value={props.field.value} mask={currencyMask} />;
+  return <MaskedInput mask={currencyMask} value={amount}  onChange={e => {setFieldValue('amount', e.target.value)}}/>;
 };
 
 export default CurrencyInput;

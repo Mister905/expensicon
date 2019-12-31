@@ -25,7 +25,8 @@ class ExpenseEdit extends Component {
   };
 
   render_form = () => {
-    const { errors, touched } = this.props;
+    const { errors, touched, setFieldValue } = this.props;
+    // setFieldValue('amount', '$22');
     return (
       <div>
         <Form>
@@ -157,12 +158,10 @@ const Formik = withFormik({
     description: Yup.string().required(),
     amount: Yup.string().required()
   }),
+  enableReinitialize: true,
   handleSubmit: (values, props) => {
     const { id } = props.props.match.params;
     const { history } = props.props;
-    // console.log(id)
-    // console.log(history)
-    // console.log(values)
     props.props.update_expense(id, values, history);
   }
 })(ExpenseEdit);
