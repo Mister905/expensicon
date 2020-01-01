@@ -7,6 +7,7 @@ import {
 } from "./types";
 import uuid from "uuid";
 import moment from "moment";
+import database from "../firebase/firebase";
 
 export const get_expenses = (expenses, filters) => {
   const { search_text, sort_by, start_date, end_date } = filters;
@@ -25,8 +26,12 @@ export const get_expenses = (expenses, filters) => {
     const filtered_expenses = expenses
       .filter(expense => {
         // const created_at_moment = moment(expense.created_at);
-        const start_date_match = start_date ? (start_date.isSameOrBefore(expense.created_at, 'day')) : (true);
-        const end_date_match = end_date ? (end_date.isSameOrBefore(expense.created_at, 'day')) : (true);
+        const start_date_match = start_date
+          ? start_date.isSameOrBefore(expense.created_at, "day")
+          : true;
+        const end_date_match = end_date
+          ? end_date.isSameOrBefore(expense.created_at, "day")
+          : true;
         const text_match = expense.description
           .toLowerCase()
           .includes(search_text.toLowerCase());
@@ -55,25 +60,40 @@ export const get_expense = expense_id => ({
 });
 
 export const create_expense = (form_values, history) => async dispatch => {
-  const { description, amount, note } = form_values;
+  const { description, amount, note, created_at } = form_values;
+
+  const new_id = uuid();
+
+  const created_at_timestamp = created_at.format("x");
+
+  const new_expense = {
+    id: new_id,
+    description,
+    amount,
+    note,
+    created_at: created_at_timestamp
+  };
+
+  const res = await database.ref("expenses").push(new_expense);
+
   dispatch({
     type: CREATE_EXPENSE,
-    payload: {
-      id: uuid(),
-      description,
-      amount,
-      note,
-      created_at: Date.now()
-    }
+    payload: new_expense
   });
   history.push("/");
 };
 
-export const update_expense = (expense_id, form_values, history) => async dispatch => {
- 
-  dispatch({ type: UPDATE_EXPENSE, payload: { id: expense_id, ...form_values} })
+export const update_expense = (
+  expense_id,
+  form_values,
+  history
+) => async dispatch => {
+  dispatch({
+    type: UPDATE_EXPENSE,
+    payload: { id: expense_id, ...form_values }
+  });
   history.push(`/expenses/${expense_id}`);
-}
+};
 
 export const delete_expense = (expense_id, history) => async dispatch => {
   dispatch({ type: DELETE_EXPENSE, payload: expense_id });

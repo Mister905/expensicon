@@ -8,22 +8,7 @@ import {
 import moment from "moment";
 
 const INITIAL_STATE = {
-  expenses: [
-    {
-      id: "gfsadf7892342fswa",
-      description: "January Rent",
-      note: "afsadlkjk;lsaflk",
-      amount: "$69",
-      created_at: moment()
-    },
-    {
-      id: "fdsasdfsadfgdfsgreqr",
-      description: "March Rent",
-      note: "kjlkhjkhaflk",
-      amount: "$88",
-      created_at: moment()
-    }
-  ],
+  expenses: [],
   loading_expenses: true,
   current_expense: {},
   loading_current_expense: true

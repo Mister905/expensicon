@@ -21,8 +21,9 @@ class SingleDateInput extends Component {
   };
 
   on_date_change = date => {
-    const { setFieldValue } = this.props.form;
-    setFieldValue("created_at", date);
+    this.setState({
+      created_at: date
+    })
   };
 
   on_focus_change = ({ focused }) => {
