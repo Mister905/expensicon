@@ -81,33 +81,29 @@ class ExpenseCreate extends Component {
           <div className="row">
             <div className="col m4 offset-m4">
               <div className="input-field">
-                <span
-                  className="custom-label"
-                >
-                  Notes
-                </span>
+                <span className="custom-label">Notes</span>
                 <Field
                   component="textarea"
                   name="note"
                   innerRef={this.note_textarea}
-                  className='materialize-textarea'
+                  className="materialize-textarea"
                 />
               </div>
             </div>
           </div>
           <div className="row">
             <div className="col m4 offset-m4">
-              <Field
-                name="created_at"
-                component={DateInput}
-              />
+              <div className="input-field">
+                <span className="custom-label">Date</span>
+                <Field name="created_at" component={DateInput} />
+              </div>
             </div>
           </div>
           <div className="row">
             <div className="col m4 offset-m4">
               <button type="submit" className="btn right green">
                 Create
-                <i className="material-icons custom-icon">add</i>
+                <i className="material-icons custom-icon create-icon">add</i>
               </button>
             </div>
           </div>
