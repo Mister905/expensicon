@@ -35,7 +35,7 @@ class ExpenseList extends Component {
       return expenses.map(expense => {
         return (
           <div key={expense.id} className="row">
-            <div className="col m12 card">
+            <div className="col m8 offset-m2 card">
               <Link to={`/expenses/${expense.id}`}>
                 <span className="card-title">{expense.description}</span>
               </Link>

@@ -6,9 +6,10 @@ import {
   GET_EXPENSE
 } from "./types";
 import uuid from "uuid";
+import moment from "moment";
 
 export const get_expenses = (expenses, filters) => {
-  const { text, sort_by, start_date, end_date } = filters;
+  const { search_text, sort_by, start_date, end_date } = filters;
   /* check if the start_date/end_date is not a number. if it's not then 
     the dates haven't been set yet so we can show all of the expenses.
     If start_date/end_date have been set then we check to see if the expense's 
@@ -23,13 +24,12 @@ export const get_expenses = (expenses, filters) => {
   try {
     const filtered_expenses = expenses
       .filter(expense => {
-        const start_date_match =
-          typeof start_date !== "number" || expense.created_at >= start_date;
-        const end_date_match =
-          typeof end_date !== "number" || expense.created_at <= end_date;
+        // const created_at_moment = moment(expense.created_at);
+        const start_date_match = start_date ? (start_date.isSameOrBefore(expense.created_at, 'day')) : (true);
+        const end_date_match = end_date ? (end_date.isSameOrBefore(expense.created_at, 'day')) : (true);
         const text_match = expense.description
           .toLowerCase()
-          .includes(text.toLowerCase());
+          .includes(search_text.toLowerCase());
         return start_date_match && end_date_match && text_match;
       })
       .sort((a, b) => {

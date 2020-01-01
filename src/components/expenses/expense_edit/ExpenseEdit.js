@@ -6,7 +6,7 @@ import M from "materialize-css";
 import { get_expense, update_expense } from "../../../actions/expenses";
 import { Link } from "react-router-dom";
 import CurrencyInput from "../../utils/currency_input/CurrencyInput";
-import DateInput from "../../utils/date_input/DateInput";
+import SingleDateInput from "../../utils/single_date_input/SingleDateInput";
 import Preloader from "../../../components/layout/preloader/Preloader";
 
 class ExpenseEdit extends Component {
@@ -90,7 +90,7 @@ class ExpenseEdit extends Component {
             <div className="col m4 offset-m4">
               <div className="input-field">
                 <span className="custom-label">Date</span>
-                <Field name="created_at" component={DateInput} current_expense={current_expense} />
+                <Field name="created_at" component={SingleDateInput} current_expense={current_expense} />
               </div>
             </div>
           </div>

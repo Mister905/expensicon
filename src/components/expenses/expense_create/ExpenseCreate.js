@@ -6,7 +6,7 @@ import M, { Datepicker } from "materialize-css";
 import { create_expense } from "../../../actions/expenses";
 import { Link } from "react-router-dom";
 import CurrencyInput from "../../utils/currency_input/CurrencyInput";
-import DateInput from "../../utils/date_input/DateInput";
+import SingleDateInput from "../../utils/single_date_input/SingleDateInput";
 
 class ExpenseCreate extends Component {
   constructor(props) {
@@ -94,7 +94,7 @@ class ExpenseCreate extends Component {
             <div className="col m4 offset-m4">
               <div className="input-field">
                 <span className="custom-label">Date</span>
-                <Field name="created_at" component={DateInput} />
+                <Field name="created_at" component={SingleDateInput} />
               </div>
             </div>
           </div>
@@ -132,8 +132,7 @@ const Formik = withFormik({
       .label("Amount")
   }),
   handleSubmit(values, props) {
-    console.log(values)
-    // props.props.create_expense(values, props.props.history);
+    props.props.create_expense(values, props.props.history);
   }
 })(ExpenseCreate);
 

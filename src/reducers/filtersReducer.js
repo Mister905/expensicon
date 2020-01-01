@@ -5,12 +5,13 @@ import {
   SET_START_DATE,
   SET_END_DATE
 } from "../actions/types";
+import moment from 'moment';
 
 const INITIAL_STATE = {
-  text: "",
+  search_text: "",
   sort_by: "amount",
-  start_date: undefined,
-  end_date: undefined
+  start_date: moment().startOf('month'),
+  end_date: moment().endOf('month')
 };
 
 export default (state = INITIAL_STATE, action) => {

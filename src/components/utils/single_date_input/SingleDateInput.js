@@ -4,18 +4,21 @@ import "react-dates/lib/css/_datepicker.css";
 import { SingleDatePicker } from "react-dates";
 import moment from "moment";
 
-class DateInput extends Component {
-
+class SingleDateInput extends Component {
   state = {
     focused: false,
-    created_at: this.props.current_expense.created_at ? (this.props.current_expense.created_at) : (null)
+    created_at: moment()
   };
 
   componentDidMount = () => {
-    console.log(this.props)
     const { setFieldValue } = this.props.form;
-    setFieldValue("created_at", this.state.created_at);
-  }
+    if (this.props.current_expense) {
+      const { current_expense } = this.props;
+      setFieldValue("created_at", current_expense.created_at);
+    } else {
+      setFieldValue("created_at", this.state.created_at);
+    }
+  };
 
   on_date_change = date => {
     const { setFieldValue } = this.props.form;
@@ -28,7 +31,7 @@ class DateInput extends Component {
 
   render() {
     return (
-      <div id="custom-datepicker-wrapper">
+      <div id="custom-single-date-picker-wrapper">
         <SingleDatePicker
           date={this.state.created_at}
           onDateChange={date => this.on_date_change(date)}
@@ -45,4 +48,4 @@ class DateInput extends Component {
   }
 }
 
-export default DateInput;
+export default SingleDateInput;

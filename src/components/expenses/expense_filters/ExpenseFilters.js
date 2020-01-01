@@ -8,6 +8,7 @@ import {
   sort_by_date
 } from "../../../actions/filters";
 import M from "materialize-css";
+import DateRangeInput from "../../utils/date_range_input/DateRangeInput";
 
 class ExpenseFilters extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class ExpenseFilters extends Component {
   };
 
   render() {
-    const { values, errors, touched, handleChange } = this.props;
+    const { filters } = this.props;
     return (
       <div>
         <div className="row">
@@ -44,13 +45,7 @@ class ExpenseFilters extends Component {
           <div className="row">
             <div className="col m12">
               <div className="input-field input-group">
-                <Field
-                  type="text"
-                  name="search_text"
-                  className={
-                    touched.search_text && errors.search_text && "invalid"
-                  }
-                />
+                <Field type="text" name="search_text" />
                 <label htmlFor="search_text" type="text" className="active">
                   Search
                 </label>
@@ -59,11 +54,6 @@ class ExpenseFilters extends Component {
                     <i className="material-icons">search</i>
                   </button>
                 </span>
-                {touched.search_text && errors.search_text && (
-                  <span className="helper-text error-helper">
-                    {errors.search_text}
-                  </span>
-                )}
               </div>
             </div>
           </div>
@@ -83,6 +73,14 @@ class ExpenseFilters extends Component {
               </div>
             </div>
           </div>
+          <div className="row">
+            <div className="col m12">
+              <div className="input-field">
+                <span className="custom-label">Date Range</span>
+                <Field name="date_range_filter" component={DateRangeInput} filters={filters}/>
+              </div>
+            </div>
+          </div>
         </Form>
       </div>
     );
@@ -91,14 +89,14 @@ class ExpenseFilters extends Component {
 
 const Formik = withFormik({
   mapPropsToValues(props) {
-    const { text, sort_by } = props.filters;
+    const { search_text, sort_by, start_date, end_date } = props.filters;
     return {
-      search_text: text || ""
+      search_text: "",
+      sort_by: "date",
+      start_date,
+      end_date
     };
   },
-  validationSchema: Yup.object().shape({
-    search_text: Yup.string()
-  }),
   handleSubmit(values, props) {
     const { search_text } = values;
     props.props.set_text_filter(search_text);
