@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { get_expenses } from "../../../actions/expenses";
 import Preloader from "../../layout/preloader/Preloader";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 class ExpenseList extends Component {
   componentDidMount = () => {
@@ -40,7 +41,7 @@ class ExpenseList extends Component {
               </Link>
               <p>{expense.amount}</p>
               <p>{expense.note}</p>
-              <p>{expense.created_at}</p>
+              <p>{expense.created_at.format('MMMM Do, YYYY')}</p>
             </div>
           </div>
         );

@@ -5,6 +5,7 @@ import {
   GET_EXPENSES,
   GET_EXPENSE
 } from "../actions/types";
+import moment from "moment";
 
 const INITIAL_STATE = {
   expenses: [
@@ -13,14 +14,14 @@ const INITIAL_STATE = {
       description: "January Rent",
       note: "afsadlkjk;lsaflk",
       amount: "$69",
-      created_at: Date.now()
+      created_at: moment()
     },
     {
       id: "fdsasdfsadfgdfsgreqr",
       description: "March Rent",
       note: "kjlkhjkhaflk",
       amount: "$88",
-      created_at: Date.now()
+      created_at: moment()
     }
   ],
   loading_expenses: true,

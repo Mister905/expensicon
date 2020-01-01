@@ -6,6 +6,7 @@ import M from "materialize-css";
 import { get_expense, update_expense } from "../../../actions/expenses";
 import { Link } from "react-router-dom";
 import CurrencyInput from "../../utils/currency_input/CurrencyInput";
+import DateInput from "../../utils/date_input/DateInput";
 import Preloader from "../../../components/layout/preloader/Preloader";
 
 class ExpenseEdit extends Component {
@@ -25,33 +26,27 @@ class ExpenseEdit extends Component {
   };
 
   render_form = () => {
-    const { errors, touched, setFieldValue } = this.props;
-    // setFieldValue('amount', '$22');
+    const { current_expense } = this.props.expenses;
+    const { errors } = this.props;
     return (
       <div>
         <Form>
           <div className="row">
             <div className="col m4 offset-m4">
               <div className="input-field">
-                <Field
-                  type="text"
-                  name="description"
+                <span
                   className={
-                    touched.description && errors.description && "invalid"
-                  }
-                />
-                <label
-                  htmlFor="description"
-                  className={
-                    "active" +
-                    (touched.description && errors.description
-                      ? " error-label"
-                      : "")
+                    "custom-label" + (errors.description ? " error-label" : "")
                   }
                 >
                   Description
-                </label>
-                {touched.description && errors.description && (
+                </span>
+                <Field
+                  type="text"
+                  name="description"
+                  className={errors.description && "invalid"}
+                />
+                {errors.description && (
                   <span className="helper-text error-helper">
                     {errors.description}
                   </span>
@@ -62,17 +57,15 @@ class ExpenseEdit extends Component {
           <div className="row">
             <div className="col m4 offset-m4">
               <div className="input-field">
-                <Field name="amount" component={CurrencyInput} />
-                <label
-                  htmlFor="amount"
+                <span
                   className={
-                    "active" +
-                    (touched.amount && errors.amount ? " error-label" : "")
+                    "custom-label" + (errors.amount ? " error-label" : "")
                   }
                 >
                   Amount
-                </label>
-                {touched.amount && errors.amount && (
+                </span>
+                <Field name="amount" component={CurrencyInput} />
+                {errors.amount && (
                   <span className="helper-text error-helper">
                     {errors.amount}
                   </span>
@@ -83,23 +76,21 @@ class ExpenseEdit extends Component {
           <div className="row">
             <div className="col m4 offset-m4">
               <div className="input-field">
+                <span className="custom-label">Notes</span>
                 <Field
                   component="textarea"
                   name="note"
                   innerRef={this.note_textarea}
-                  className={
-                    `materialize-textarea ` +
-                    (touched.note && errors.note ? "invalid" : "")
-                  }
+                  className="materialize-textarea"
                 />
-                <label htmlFor="note" className="active">
-                  Note
-                </label>
-                {touched.note && errors.note && (
-                  <span className="helper-text error-helper">
-                    {errors.note}
-                  </span>
-                )}
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col m4 offset-m4">
+              <div className="input-field">
+                <span className="custom-label">Date</span>
+                <Field name="created_at" component={DateInput} current_expense={current_expense} />
               </div>
             </div>
           </div>
@@ -122,7 +113,7 @@ class ExpenseEdit extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col m2 offset-m2 center-align">
+          <div className="col m2 offset-m2">
             <Link to={`/expenses/${id}`} className="btn green">
               <i className="material-icons custom-icon">arrow_back</i>
             </Link>
@@ -147,18 +138,20 @@ class ExpenseEdit extends Component {
 
 const Formik = withFormik({
   mapPropsToValues: props => {
-    const { description, amount, note } = props.expenses.current_expense;
+    const { description, amount, note, created_at } = props.expenses.current_expense;
     return {
       description: description || "",
       amount: amount || "",
-      note: note || ""
+      note: note || "",
+      created_at: created_at || ""
     };
   },
   validationSchema: Yup.object().shape({
-    description: Yup.string().required(),
-    amount: Yup.string().required()
+    description: Yup.string().required().label("Description"),
+    amount: Yup.string().required().label("Amount")
   }),
-  enableReinitialize: true,
+  validateOnBlur: false,
+  validateOnChange: false,
   handleSubmit: (values, props) => {
     const { id } = props.props.match.params;
     const { history } = props.props;

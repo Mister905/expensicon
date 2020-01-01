@@ -26,7 +26,7 @@ class ExpenseView extends Component {
             <span className="card-title">{current_expense.description}</span>
             <p>{current_expense.amount}</p>
             <p>{current_expense.note}</p>
-            <p>{current_expense.created_at}</p>
+            <p>{current_expense.created_at.format('MMMM Do, YYYY')}</p>
           </div>
         </div>
         <div className="row">
@@ -107,10 +107,20 @@ class ExpenseView extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col m12 center-align">
-            <h1>Expense Details</h1>
+          <div className="col m2 offset-m2">
+            <Link to={'/expenses'} className="btn green">
+              <i className="material-icons custom-icon">arrow_back</i>
+            </Link>
+          </div>
+          <div className="col m4 center-align">
+            <div className="component-heading">Expense Details</div>
           </div>
         </div>
+
+
+
+
+
         <div className="row">
           <div className="col m12 center-align">
             {loading_current_expense ? <Preloader /> : this.render_expense()}

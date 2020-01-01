@@ -23,11 +23,10 @@ class ExpenseCreate extends Component {
 
   render() {
     const { errors } = this.props;
-    console.log(errors);
     return (
       <div>
         <div className="row">
-          <div className="col m2 offset-m2 center-align">
+          <div className="col m2 offset-m2">
             <Link to={"/"} className="btn green">
               <i className="material-icons custom-icon">arrow_back</i>
             </Link>
@@ -64,7 +63,7 @@ class ExpenseCreate extends Component {
               <div className="input-field">
                 <span
                   className={
-                    "custom-label" + (errors.description ? " error-label" : "")
+                    "custom-label" + (errors.amount ? " error-label" : "")
                   }
                 >
                   Amount
@@ -118,7 +117,8 @@ const Formik = withFormik({
     return {
       description: "",
       amount: "",
-      note: ""
+      note: "",
+      created_at: null
     };
   },
   validateOnBlur: false,
@@ -132,7 +132,8 @@ const Formik = withFormik({
       .label("Amount")
   }),
   handleSubmit(values, props) {
-    props.props.create_expense(values, props.props.history);
+    console.log(values)
+    // props.props.create_expense(values, props.props.history);
   }
 })(ExpenseCreate);
 
