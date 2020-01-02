@@ -12,10 +12,9 @@ class ExpenseList extends Component {
   };
 
   componentDidUpdate = prevProps => {
-    if (prevProps.filters.text !== this.props.filters.text) {
-      const { expenses } = this.props.expenses;
+    if (prevProps.filters.search_text !== this.props.filters.search_text) {
       const { filters } = this.props;
-      this.props.get_expenses(expenses, filters);
+      this.props.get_expenses(filters);
     }
   };
 
@@ -57,7 +56,7 @@ class ExpenseList extends Component {
           </div>
           <div className="col m2 center-align">
             <Link to={"/expenses/create"} className="btn green">
-              Create <i className="material-icons custom-icon">add</i>
+              <i className="material-icons custom-icon">add</i>
             </Link>
           </div>
         </div>

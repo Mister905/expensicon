@@ -21,7 +21,7 @@ export default (state = INITIAL_STATE, action) => {
     case SET_TEXT_FILTER:
       return {
         ...state,
-        text: payload
+        search_text: payload
       };
     case SORT_BY_AMOUNT:
       return {

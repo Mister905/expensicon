@@ -46,6 +46,7 @@ export const get_expenses = filters => async dispatch => {
           const end_date_match = end_date
             ? end_date.isSameOrAfter(created_at_moment, "day")
             : true;
+            console.log(expense.description.toLowerCase())
           const text_match = expense.description
             .toLowerCase()
             .includes(search_text.toLowerCase());

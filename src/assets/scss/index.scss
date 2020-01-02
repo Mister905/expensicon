@@ -4,10 +4,12 @@
 @import "../../components/layout/help/Help.scss";
 @import "../../components/layout/not_found/NotFound.scss";
 @import "../../components/expenses/expense_list/ExpenseList.scss";
-@import "../../components/expenses/expense_filters/ExpenseFilters.scss";
-@import "../../components//utils/currency_input/CurrencyInput.scss";
+// @import "../../components/expenses/expense_filters/ExpenseFilters.scss";
+// @import "../../components//utils/currency_input/CurrencyInput.scss";
 @import "../../components/utils/single_date_input/SingleDateInput.scss";
 @import "../../components/utils/date_range_input/DateRangeInput.scss";
+@import "../../components/filters/expense_filters/ExpenseFilters.scss";
+@import "../../components/filters/text_search_filter/TextSearchFilter.scss";
 
 .custom-icon {
     vertical-align: bottom;

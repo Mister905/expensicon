@@ -6,9 +6,9 @@ import {
   SET_END_DATE
 } from "./types";
 
-export const set_text_filter = (text = "") => ({
+export const set_text_filter = (search_text = "") => ({
   type: SET_TEXT_FILTER,
-  payload: text
+  payload: search_text
 });
 
 export const sort_by_amount = () => ({
