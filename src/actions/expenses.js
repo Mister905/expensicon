@@ -39,9 +39,6 @@ export const get_expenses = filters => async dispatch => {
 
       const filtered_expenses = expenses
         .filter(expense => {
-
-          console.log(currency(expense.amount))
-
           const created_at_moment = moment(expense.created_at);
           const start_date_match = start_date
             ? start_date.isSameOrBefore(created_at_moment, "day")
@@ -64,10 +61,10 @@ export const get_expenses = filters => async dispatch => {
           // }
         });
 
-      // dispatch({
-      //   type: GET_EXPENSES,
-      //   payload: filtered_expenses
-      // });
+      dispatch({
+        type: GET_EXPENSES,
+        payload: filtered_expenses
+      });
     });
 };
 
@@ -86,7 +83,7 @@ export const create_expense = (form_values, history) => async dispatch => {
   const new_expense = {
     id: new_id,
     description,
-    amount: amount,
+    amount: currency(amount),
     note,
     created_at: created_at_timestamp
   };

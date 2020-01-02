@@ -4,6 +4,8 @@ import { get_expense, delete_expense } from "../../../actions/expenses";
 import Preloader from "../../../components/layout/preloader/Preloader";
 import { Modal, Button } from "react-materialize";
 import { Link } from "react-router-dom";
+import currency from "currency.js";
+import moment from "moment";
 
 class ExpenseView extends Component {
   componentDidMount = () => {
@@ -19,14 +21,15 @@ class ExpenseView extends Component {
 
   render_expense = () => {
     const { current_expense } = this.props.expenses;
+    console.log(current_expense);
     return (
       <div>
         <div className="row">
           <div className="col m6 offset-m3 card">
             <span className="card-title">{current_expense.description}</span>
-            <p>{current_expense.amount}</p>
+            <p>${currency(current_expense.amount.value).format()}</p>
             <p>{current_expense.note}</p>
-            <p>{current_expense.created_at.format('MMMM Do, YYYY')}</p>
+            <p>Created On: {moment(current_expense.created_at).format("MMMM Do, YYYY")}</p>
           </div>
         </div>
         <div className="row">
@@ -108,7 +111,7 @@ class ExpenseView extends Component {
       <div>
         <div className="row">
           <div className="col m2 offset-m2">
-            <Link to={'/expenses'} className="btn green">
+            <Link to={"/expenses"} className="btn green">
               <i className="material-icons custom-icon">arrow_back</i>
             </Link>
           </div>
@@ -116,10 +119,6 @@ class ExpenseView extends Component {
             <div className="component-heading">Expense Details</div>
           </div>
         </div>
-
-
-
-
 
         <div className="row">
           <div className="col m12 center-align">

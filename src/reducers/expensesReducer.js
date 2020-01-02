@@ -53,6 +53,7 @@ export default (state = INITIAL_STATE, action) => {
         })
       };
     case GET_EXPENSE:
+      console.log(state.expenses)
       return {
         ...state,
         current_expense: state.expenses.find(expense => {
