@@ -20,10 +20,17 @@ class SingleDateInput extends Component {
     }
   };
 
+  componentDidUpdate = (prevProps, prevState) => {
+    const { setFieldValue } = this.props.form;
+    if (prevState.created_at !== this.state.created_at) {
+      setFieldValue("created_at", this.state.created_at);
+    }
+  };
+
   on_date_change = date => {
     this.setState({
       created_at: date
-    })
+    });
   };
 
   on_focus_change = ({ focused }) => {
@@ -42,6 +49,7 @@ class SingleDateInput extends Component {
           daySize={50}
           withPortal={true}
           numberOfMonths={1}
+          isOutsideRange={() => false}
         />
       </div>
     );

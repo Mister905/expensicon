@@ -12,7 +12,7 @@ class ExpenseList extends Component {
   };
 
   componentDidUpdate = prevProps => {
-    if (prevProps.filters.search_text !== this.props.filters.search_text) {
+    if (prevProps.filters !== this.props.filters) {
       const { filters } = this.props;
       this.props.get_expenses(filters);
     }
@@ -30,20 +30,32 @@ class ExpenseList extends Component {
         </div>
       );
     } else {
-      return expenses.map(expense => {
+      if (expenses.length > 0) {
+        return expenses.map(expense => {
+          return (
+            <div key={expense.id} className="row">
+              <div className="col m8 offset-m2 card">
+                <Link to={`/expenses/${expense.id}`}>
+                  <span className="card-title">{expense.description}</span>
+                </Link>
+                <p>{expense.amount}</p>
+                <p>{expense.note}</p>
+                <p>{moment(expense.created_at).format("MMMM Do, YYYY")}</p>
+              </div>
+            </div>
+          );
+        });
+      } else {
         return (
-          <div key={expense.id} className="row">
-            <div className="col m8 offset-m2 card">
-              <Link to={`/expenses/${expense.id}`}>
-                <span className="card-title">{expense.description}</span>
-              </Link>
-              <p>{expense.amount}</p>
-              <p>{expense.note}</p>
-              <p>{moment(expense.created_at).format('MMMM Do, YYYY')}</p>
+          <div>
+            <div className="row">
+              <div className="col m12 center-align">
+                <div>No expenses found...</div>
+              </div>
             </div>
           </div>
         );
-      });
+      }
     }
   };
 

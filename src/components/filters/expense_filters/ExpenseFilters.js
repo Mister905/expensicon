@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import TextSearchFilter from '../text_search_filter/TextSearchFilter';
-import SortByFilter from '../sort_by_filter/SortByFilter';
-import DateRangeFilter from '../date_range_filter/DateRangeFilter';
+import TextSearchFilter from "../text_search_filter/TextSearchFilter";
+import SortByFilter from "../sort_by_filter/SortByFilter";
+import DateRangeFilter from "../date_range_filter/DateRangeFilter";
 
 class ExpenseFilters extends Component {
   render() {
@@ -12,21 +12,9 @@ class ExpenseFilters extends Component {
             <div className="component-heading">Filter Expenses</div>
           </div>
         </div>
-        <div className="row">
-          <div className="col m12">
-            <TextSearchFilter />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col m12">
-            <SortByFilter />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col m12">
-            <DateRangeFilter />
-          </div>
-        </div>
+        <TextSearchFilter />
+        <SortByFilter />
+        <DateRangeFilter />
       </div>
     );
   }

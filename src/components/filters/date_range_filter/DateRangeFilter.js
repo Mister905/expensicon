@@ -9,15 +9,13 @@ class DateRangeFilter extends Component {
     return (
       <Form>
         <div className="row">
-          <div className="col m12">
-            <div className="input-field">
-              <span className="custom-label">Date Range</span>
-              <Field
-                name="date_range_filter"
-                component={DateRangeInput}
-                filters={filters}
-              />
-            </div>
+          <div className="input-field col m10 offset-m2">
+            <span className="custom-label">Date Range</span>
+            <Field
+              name="date_range_filter"
+              component={DateRangeInput}
+              filters={filters}
+            />
           </div>
         </div>
       </Form>
@@ -44,6 +42,6 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-//   sort_by_amount,
-//   sort_by_date
+  //   sort_by_amount,
+  //   sort_by_date
 })(Formik);

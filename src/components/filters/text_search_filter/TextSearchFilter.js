@@ -9,18 +9,17 @@ class TextSearchFilter extends Component {
     return (
       <Form>
         <div className="row">
-          <div className="col m12">
-            <div className="input-field input-group">
-              <Field type="text" name="search_text" />
-              <label htmlFor="search_text" type="text" className="active">
-                Search
-              </label>
-              <span className="suffix">
-                <button className="btn btn-floating waves-effect waves-light green">
-                  <i className="material-icons">search</i>
-                </button>
-              </span>
-            </div>
+          <div className="input-field col m8 offset-m2">
+            <Field type="text" name="search_text" />
+            <label htmlFor="search_text">Search</label>
+          </div>
+          <div className="input-field col m2">
+            <button
+              className="btn btn-floating waves-effect waves-light green"
+              type="submit"
+            >
+              <i className="material-icons">search</i>
+            </button>
           </div>
         </div>
       </Form>

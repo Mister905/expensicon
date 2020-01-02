@@ -26,6 +26,7 @@ class DateRangeInput extends Component {
           onFocusChange={focused_input => this.setState({ focused_input })}
           daySize={50}
           showClearDates={true}
+          isOutsideRange={() => false}
         />
       </div>
     );

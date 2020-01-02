@@ -9,7 +9,6 @@ import uuid from "uuid";
 import moment from "moment";
 import database from "../firebase/firebase";
 
-// export const get_expenses = (expenses, filters) => {
 export const get_expenses = filters => async dispatch => {
   const { search_text, sort_by, start_date, end_date } = filters;
 
@@ -46,7 +45,6 @@ export const get_expenses = filters => async dispatch => {
           const end_date_match = end_date
             ? end_date.isSameOrAfter(created_at_moment, "day")
             : true;
-            console.log(expense.description.toLowerCase())
           const text_match = expense.description
             .toLowerCase()
             .includes(search_text.toLowerCase());
@@ -75,8 +73,6 @@ export const get_expense = expense_id => ({
 export const create_expense = (form_values, history) => async dispatch => {
   const { description, amount, note, created_at } = form_values;
 
-  console.log(created_at);
-
   const new_id = uuid();
 
   const created_at_timestamp = created_at.valueOf();
@@ -84,11 +80,12 @@ export const create_expense = (form_values, history) => async dispatch => {
   const new_expense = {
     id: new_id,
     description,
-    amount,
+    amount: amount,
     note,
     created_at: created_at_timestamp
   };
 
+  
   const res = await database.ref("expenses").push(new_expense);
 
   dispatch({

@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
-import {
-  sort_by_amount,
-  sort_by_date
-} from "../../../actions/filters";
+import { sort_by_amount, sort_by_date } from "../../../actions/filters";
 import M from "materialize-css";
 
 class SortByFilter extends Component {
@@ -15,10 +12,8 @@ class SortByFilter extends Component {
   }
 
   componentDidMount = () => {
-    document.addEventListener("DOMContentLoaded", function() {
-      var elems = document.querySelectorAll("select");
-      var instances = M.FormSelect.init(elems, null);
-    });
+    var elem = document.querySelector("#select_filter");
+    M.FormSelect.init(elem, null);
   };
 
   handle_select_filter_change = e => {
@@ -34,19 +29,18 @@ class SortByFilter extends Component {
     return (
       <Form>
         <div className="row">
-          <div className="col m12">
-            <div className="input-field">
-              <Field
-                as="select"
-                name="select_filter"
-                onChange={e => {
-                  this.handle_select_filter_change(e);
-                }}
-              >
-                <option value="date">Date</option>
-                <option value="amount">Amount</option>
-              </Field>
-            </div>
+          <div className="input-field col m8 offset-m2">
+            <Field
+              id="select_filter"
+              as="select"
+              name="select_filter"
+              onChange={e => {
+                this.handle_select_filter_change(e);
+              }}
+            >
+              <option value="date">Date</option>
+              <option value="amount">Amount</option>
+            </Field>
           </div>
         </div>
       </Form>
