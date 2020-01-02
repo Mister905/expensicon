@@ -8,6 +8,7 @@ import {
 import uuid from "uuid";
 import moment from "moment";
 import database from "../firebase/firebase";
+import currency from 'currency.js';
 
 export const get_expenses = filters => async dispatch => {
   const { search_text, sort_by, start_date, end_date } = filters;
@@ -38,6 +39,9 @@ export const get_expenses = filters => async dispatch => {
 
       const filtered_expenses = expenses
         .filter(expense => {
+
+          console.log(currency(expense.amount))
+
           const created_at_moment = moment(expense.created_at);
           const start_date_match = start_date
             ? start_date.isSameOrBefore(created_at_moment, "day")
@@ -51,17 +55,19 @@ export const get_expenses = filters => async dispatch => {
           return start_date_match && end_date_match && text_match;
         })
         .sort((a, b) => {
-          if (sort_by === "date") {
-            return a.created_at < b.created_at ? 1 : -1;
-          } else if (sort_by === "amount") {
-            return a.amount < b.amount ? 1 : -1;
-          }
+          // console.log(a.amount)
+          // console.log(b.amount)
+          // if (sort_by === "date") {
+          //   return a.created_at < b.created_at ? 1 : -1;
+          // } else if (sort_by === "amount") {
+          //   return a.amount < b.amount ? 1 : -1;
+          // }
         });
 
-      dispatch({
-        type: GET_EXPENSES,
-        payload: filtered_expenses
-      });
+      // dispatch({
+      //   type: GET_EXPENSES,
+      //   payload: filtered_expenses
+      // });
     });
 };
 
