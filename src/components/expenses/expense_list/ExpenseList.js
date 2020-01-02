@@ -7,9 +7,8 @@ import moment from "moment";
 
 class ExpenseList extends Component {
   componentDidMount = () => {
-    const { expenses } = this.props.expenses;
     const { filters } = this.props;
-    this.props.get_expenses(expenses, filters);
+    this.props.get_expenses(filters);
   };
 
   componentDidUpdate = prevProps => {
@@ -25,8 +24,8 @@ class ExpenseList extends Component {
     const { expenses } = this.props.expenses;
     if (loading_expenses) {
       return (
-        <div className="row">
-          <div className="col m12">
+        <div className="row mt-50">
+          <div className="col m12 center-align">
             <Preloader />
           </div>
         </div>
@@ -41,7 +40,7 @@ class ExpenseList extends Component {
               </Link>
               <p>{expense.amount}</p>
               <p>{expense.note}</p>
-              <p>{expense.created_at.format('MMMM Do, YYYY')}</p>
+              <p>{moment(expense.created_at).format('MMMM Do, YYYY')}</p>
             </div>
           </div>
         );

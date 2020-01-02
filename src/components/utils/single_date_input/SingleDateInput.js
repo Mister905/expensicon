@@ -42,7 +42,6 @@ class SingleDateInput extends Component {
           daySize={50}
           withPortal={true}
           numberOfMonths={1}
-          isOutsideRange={() => false}
         />
       </div>
     );
