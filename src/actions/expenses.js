@@ -8,7 +8,7 @@ import {
 import uuid from "uuid";
 import moment from "moment";
 import database from "../firebase/firebase";
-import currency from 'currency.js';
+import currency from "currency.js";
 
 export const get_expenses = filters => async dispatch => {
   const { search_text, sort_by, start_date, end_date } = filters;
@@ -76,23 +76,24 @@ export const get_expense = expense_id => ({
 export const create_expense = (form_values, history) => async dispatch => {
   const { description, amount, note, created_at } = form_values;
 
-  const new_id = uuid();
+  // const new_id = uuid();
 
   const created_at_timestamp = created_at.valueOf();
 
   const new_expense = {
-    id: new_id,
     description,
     amount: amount,
     note,
     created_at: created_at_timestamp
   };
-  
+
   const res = await database.ref("expenses").push(new_expense);
+
+  const { key } = res.ref;
 
   dispatch({
     type: CREATE_EXPENSE,
-    payload: new_expense
+    payload: { id: key, ...new_expense }
   });
   history.push("/");
 };
@@ -110,6 +111,7 @@ export const update_expense = (
 };
 
 export const delete_expense = (expense_id, history) => async dispatch => {
+  const res = await database.ref(`expenses/${expense_id}`).remove();
   dispatch({ type: DELETE_EXPENSE, payload: expense_id });
   history.push("/");
 };
