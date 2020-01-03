@@ -52,13 +52,13 @@ export const get_expenses = filters => async dispatch => {
           return start_date_match && end_date_match && text_match;
         })
         .sort((a, b) => {
-          // console.log(a.amount)
-          // console.log(b.amount)
-          // if (sort_by === "date") {
-          //   return a.created_at < b.created_at ? 1 : -1;
-          // } else if (sort_by === "amount") {
-          //   return a.amount < b.amount ? 1 : -1;
-          // }
+          if (sort_by === "date") {
+            return a.created_at < b.created_at ? 1 : -1;
+          } else if (sort_by === "amount") {
+            const a_currency = currency(a.amount);
+            const b_currency = currency(b.amount);
+            return a_currency.value < b_currency.value ? 1 : -1;
+          }
         });
 
       dispatch({
@@ -108,7 +108,7 @@ export const update_expense = (
   const res = await database
     .ref(`expenses/${expense_id}`)
     .update(updated_values, error => {
-      console.log(error)
+      console.log(error);
     });
 
   dispatch({

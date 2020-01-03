@@ -9,7 +9,7 @@ import moment from 'moment';
 
 const INITIAL_STATE = {
   search_text: "",
-  sort_by: "amount",
+  sort_by: "date",
   start_date: moment().startOf('month'),
   end_date: moment().endOf('month')
 };
