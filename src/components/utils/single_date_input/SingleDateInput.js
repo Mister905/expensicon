@@ -12,9 +12,12 @@ class SingleDateInput extends Component {
 
   componentDidMount = () => {
     const { setFieldValue } = this.props.form;
+    const { created_at } = this.props.form.values;
     if (this.props.current_expense) {
-      const { current_expense } = this.props;
-      setFieldValue("created_at", current_expense.created_at);
+      this.setState({
+        created_at: moment(created_at)
+      });
+      setFieldValue("created_at", moment(created_at));
     } else {
       setFieldValue("created_at", this.state.created_at);
     }

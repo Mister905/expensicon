@@ -83,11 +83,10 @@ export const create_expense = (form_values, history) => async dispatch => {
   const new_expense = {
     id: new_id,
     description,
-    amount: currency(amount),
+    amount: amount,
     note,
     created_at: created_at_timestamp
   };
-
   
   const res = await database.ref("expenses").push(new_expense);
 
@@ -100,12 +99,12 @@ export const create_expense = (form_values, history) => async dispatch => {
 
 export const update_expense = (
   expense_id,
-  form_values,
+  updated_values,
   history
 ) => async dispatch => {
   dispatch({
     type: UPDATE_EXPENSE,
-    payload: { id: expense_id, ...form_values }
+    payload: { id: expense_id, ...updated_values }
   });
   history.push(`/expenses/${expense_id}`);
 };

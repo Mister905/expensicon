@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import CurrencyInput from "../../utils/currency_input/CurrencyInput";
 import SingleDateInput from "../../utils/single_date_input/SingleDateInput";
 import Preloader from "../../../components/layout/preloader/Preloader";
+import currency from "currency.js";
 
 class ExpenseEdit extends Component {
   constructor(props) {
@@ -16,13 +17,7 @@ class ExpenseEdit extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (prevProps.values.note !== this.props.values.note) {
-      try {
-        M.textareaAutoResize(this.note_textarea.current);
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    M.textareaAutoResize(this.note_textarea.current);
   };
 
   render_form = () => {
@@ -67,7 +62,7 @@ class ExpenseEdit extends Component {
                 <Field name="amount" component={CurrencyInput} />
                 {errors.amount && (
                   <span className="helper-text error-helper">
-                    {errors.amount}
+                    {errors.amount.value}
                   </span>
                 )}
               </div>
@@ -90,7 +85,11 @@ class ExpenseEdit extends Component {
             <div className="col m4 offset-m4">
               <div className="input-field">
                 <span className="custom-label">Date</span>
-                <Field name="created_at" component={SingleDateInput} current_expense={current_expense} />
+                <Field
+                  name="created_at"
+                  component={SingleDateInput}
+                  current_expense={current_expense}
+                />
               </div>
             </div>
           </div>
@@ -138,7 +137,12 @@ class ExpenseEdit extends Component {
 
 const Formik = withFormik({
   mapPropsToValues: props => {
-    const { description, amount, note, created_at } = props.expenses.current_expense;
+    const {
+      description,
+      amount,
+      note,
+      created_at
+    } = props.expenses.current_expense;
     return {
       description: description || "",
       amount: amount || "",
@@ -147,15 +151,22 @@ const Formik = withFormik({
     };
   },
   validationSchema: Yup.object().shape({
-    description: Yup.string().required().label("Description"),
-    amount: Yup.string().required().label("Amount")
+    description: Yup.string()
+      .required()
+      .label("Description"),
+    amount: Yup.string()
+      .required()
+      .label("Amount")
   }),
   validateOnBlur: false,
   validateOnChange: false,
   handleSubmit: (values, props) => {
+    const { description, amount, note, created_at } = values;
     const { id } = props.props.match.params;
+    const currency_object = currency(amount);
+    const updated_values = { id, description, amount, note, created_at };
     const { history } = props.props;
-    props.props.update_expense(id, values, history);
+    props.props.update_expense(id, updated_values, history);
   }
 })(ExpenseEdit);
 

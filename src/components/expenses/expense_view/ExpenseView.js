@@ -21,13 +21,12 @@ class ExpenseView extends Component {
 
   render_expense = () => {
     const { current_expense } = this.props.expenses;
-    console.log(current_expense);
     return (
       <div>
         <div className="row">
           <div className="col m6 offset-m3 card">
             <span className="card-title">{current_expense.description}</span>
-            <p>${currency(current_expense.amount.value).format()}</p>
+            <p>{current_expense.amount}</p>
             <p>{current_expense.note}</p>
             <p>Created On: {moment(current_expense.created_at).format("MMMM Do, YYYY")}</p>
           </div>

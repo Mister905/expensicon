@@ -39,7 +39,7 @@ class ExpenseList extends Component {
                 <Link to={`/expenses/${expense.id}`}>
                   <span className="card-title">{expense.description}</span>
                 </Link>
-                <p>${currency(expense.amount.value).format()}</p>
+                <p>{expense.amount}</p>
                 <p>{expense.note}</p>
                 <p>{moment(expense.created_at).format("MMMM Do, YYYY")}</p>
               </div>
