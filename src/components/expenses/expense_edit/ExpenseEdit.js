@@ -163,10 +163,9 @@ const Formik = withFormik({
   handleSubmit: (values, props) => {
     const { description, amount, note, created_at } = values;
     const { id } = props.props.match.params;
-    const currency_object = currency(amount);
-    const updated_values = { id, description, amount, note, created_at };
+    const form_values = { id, ...values };
     const { history } = props.props;
-    props.props.update_expense(id, updated_values, history);
+    props.props.update_expense(id, form_values, history);
   }
 })(ExpenseEdit);
 

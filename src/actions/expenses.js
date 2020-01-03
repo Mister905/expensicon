@@ -76,14 +76,10 @@ export const get_expense = expense_id => ({
 export const create_expense = (form_values, history) => async dispatch => {
   const { description, amount, note, created_at } = form_values;
 
-  // const new_id = uuid();
-
   const created_at_timestamp = created_at.valueOf();
 
   const new_expense = {
-    description,
-    amount: amount,
-    note,
+    ...form_values,
     created_at: created_at_timestamp
   };
 
@@ -100,9 +96,21 @@ export const create_expense = (form_values, history) => async dispatch => {
 
 export const update_expense = (
   expense_id,
-  updated_values,
+  form_values,
   history
 ) => async dispatch => {
+  const { created_at } = form_values;
+
+  const created_at_timestamp = created_at.valueOf();
+
+  const updated_values = { ...form_values, created_at: created_at_timestamp };
+
+  const res = await database
+    .ref(`expenses/${expense_id}`)
+    .update(updated_values, error => {
+      console.log(error)
+    });
+
   dispatch({
     type: UPDATE_EXPENSE,
     payload: { id: expense_id, ...updated_values }
