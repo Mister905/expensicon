@@ -9,11 +9,11 @@ import "materialize-css/dist/css/materialize.min.css";
 import "./assets/scss/index.scss";
 import reducers from "./reducers";
 import { firebase } from "./firebase/firebase";
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import { login, logout } from './actions/auth';
 
 // This configuration allows you to access history outside of Router
-export const history = createHistory();
+export const history = createBrowserHistory();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
