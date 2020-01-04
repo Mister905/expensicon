@@ -1,0 +1,67 @@
+body,
+html {
+  height: 100% !important;
+  margin: 0 !important;
+}
+
+.pimg1,
+.pimg2,
+.pimg3,
+.pimg4 {
+  position: relative;
+  opacity: 0.9;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  // This is the parallax magic
+  background-attachment: fixed;
+}
+
+.pimg1 {
+  background-image: url("../../../assets/img/landing/1.jpg");
+  min-height: 800px;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.6);
+}
+
+.pimg2 {
+  background-image: url("../../../assets/img/landing/2.jpg");
+  min-height: 600px;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.6);
+}
+
+.pimg3 {
+  background-image: url("../../../assets/img/landing/3.jpg");
+  min-height: 600px;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.6);
+}
+
+.pimg4 {
+  background-image: url("../../../assets/img/landing/5.jpg");
+  min-height: 600px;
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.6);
+}
+
+.section {
+  text-align: center;
+  padding: 50px 80px;
+}
+
+.section-light {
+    background-color: #f4f4f4;
+    color: #666;
+}
+
+.section-dark {
+    background-color: #282e34;
+    color: #ddd;
+}
+
+.ptext {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    color: #FFF;
+    font-size: 4rem;
+    letter-spacing: 8px;
+}
