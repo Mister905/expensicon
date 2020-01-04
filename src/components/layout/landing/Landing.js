@@ -1,11 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { login } from "../../../actions/auth";
 import M from "materialize-css";
-import image_1 from "../../../assets/img/landing/1.jpg";
-import image_2 from "../../../assets/img/landing/2.jpg";
-import image_3 from "../../../assets/img/landing/3.jpg";
-import image_5 from "../../../assets/img/landing/5.jpg";
-import image_6 from "../../../assets/img/landing/6.jpg";
-import image_7 from "../../../assets/img/landing/7.jpg";
 import logo from "../../../assets/img/logo.png";
 
 class Landing extends Component {
@@ -20,6 +16,9 @@ class Landing extends Component {
                 Expensicon
               </span>
             </div>
+            <button className="btn btn-login" onClick={this.props.login}>
+              Login
+            </button>
           </div>
         </div>
 
@@ -79,7 +78,7 @@ class Landing extends Component {
             </div>
           </div>
           <div className="footer white-text">
-            <div className="footer-row center-align">Expensicon</div>
+            <div className="footer-row center-align">Expensicon &trade;</div>
             <div className="footer-row center-align">Hamilton, Ontario</div>
             <div className="footer-row center-align">289-775-6046</div>
             <div className="footer-row center-align">support@expensicon.ca</div>
@@ -91,4 +90,4 @@ class Landing extends Component {
   }
 }
 
-export default Landing;
+export default connect(null, { login })(Landing);

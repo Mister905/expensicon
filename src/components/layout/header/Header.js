@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import Piggy from "../../../assets/img/piggy.png";
 import { connect } from "react-redux";
-import { login } from "../../../actions/auth";
+import { logout } from "../../../actions/auth";
 
 class Header extends Component {
   render() {
@@ -20,8 +20,8 @@ class Header extends Component {
             </NavLink>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li>
-                <button className="btn green" onClick={this.props.login}>
-                  Login
+                <button className="btn btn-logout" onClick={this.props.logout}>
+                  Logout
                 </button>
               </li>
             </ul>
@@ -32,4 +32,4 @@ class Header extends Component {
   }
 }
 
-export default connect(null, login)(Header);
+export default connect(null, { logout })(Header);

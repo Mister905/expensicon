@@ -11,7 +11,6 @@ import ExpenseEdit from "./components/expenses/expense_edit/ExpenseEdit";
 import ExpenseDashboard from "./components/expenses/expense_dashboard/ExpenseDashboard";
 import ExpenseView from "./components/expenses/expense_view/ExpenseView";
 import Landing from "./components/layout/landing/Landing";
-import Login from "./components/auth/login/Login";
 
 class App extends Component {
   render() {
@@ -21,15 +20,12 @@ class App extends Component {
         {this.props.location.pathname !== "/" && <Header />}
         <Switch>
           <Route path="/" component={Landing} exact />
-          <div className="custom-container">
-            <Route path="/login" component={Login} exact />
-            <Route path="/expenses" component={ExpenseDashboard} exact />
-            <Route path="/expenses/create" component={ExpenseCreate} exact />
-            <Route path="/expenses/:id" component={ExpenseView} exact />
-            <Route path="/expenses/edit/:id" component={ExpenseEdit} exact />
-            <Route path="/help" component={Help} exact />
-            <Route component={NotFound} exact />
-          </div>
+          <Route path="/expenses" component={ExpenseDashboard} exact />
+          <Route path="/expenses/create" component={ExpenseCreate} exact />
+          <Route path="/expenses/:id" component={ExpenseView} exact />
+          <Route path="/expenses/edit/:id" component={ExpenseEdit} exact />
+          <Route path="/help" component={Help} exact />
+          <Route component={NotFound} exact />
         </Switch>
       </div>
     );

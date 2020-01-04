@@ -1,29 +1,42 @@
 .logo-img {
-    margin-top: 5px;
-    margin-left: 10px;
-    vertical-align: middle;
-    margin-bottom: 14px;
+  margin-top: 5px;
+  margin-left: 10px;
+  vertical-align: middle;
+  margin-bottom: 14px;
 }
 
 .logo-text {
-    font-size: 2rem;
-    margin-left: 8px;
-    display: inline;
+  font-size: 2rem;
+  margin-left: 8px;
+  display: inline;
 }
 
 .custom-nav-wrapper {
-    min-height: 75px;
+  min-height: 75px;
 }
 
 .height-100 {
-    height: 100% !important;
+  height: 100% !important;
 }
 
 .custom-nav-li {
-    display: table;
-    a {
-        vertical-align: middle;
+  display: table;
+  a {
+    vertical-align: middle;
     display: table-cell;
-    }
+  }
 }
 
+.btn-logout {
+  background: #fff !important;
+  color: #15781b !important;
+  font-weight: 600;
+  min-width: 100px;
+  font-size: 1.5rem;
+  font-size: 1rem;
+  margin-right: 15px;
+  &:hover {
+    background: #15781b !important;
+    color: #fff !important;
+  }
+}
