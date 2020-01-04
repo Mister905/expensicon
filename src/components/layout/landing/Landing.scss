@@ -20,7 +20,7 @@ html {
 .pimg1 {
   background-image: url("../../../assets/img/landing/1.jpg");
   min-height: 800px;
-  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 0 0 2000px rgba(21, 120, 27, 0.6);
 }
 
 .pimg2 {
@@ -47,21 +47,40 @@ html {
 }
 
 .section-light {
-    background-color: #f4f4f4;
-    color: #666;
+  background-color: #f4f4f4;
+  color: #666;
 }
 
 .section-dark {
-    background-color: #282e34;
-    color: #ddd;
+  background-color: #282e34;
+  color: #ddd;
 }
 
 .ptext {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    text-align: center;
-    color: #FFF;
-    font-size: 4rem;
-    letter-spacing: 8px;
+  position: absolute;
+  top: 42%;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 4rem;
+  letter-spacing: 8px;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.landing-brand-heading {
+  margin-left: 15px;
+}
+
+.section-text {
+  font-size: 1.2rem;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 25px;
 }
