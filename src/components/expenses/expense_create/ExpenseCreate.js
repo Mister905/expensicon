@@ -24,7 +24,7 @@ class ExpenseCreate extends Component {
   render() {
     const { errors } = this.props;
     return (
-      <div>
+      <div className="mt-50">
         <div className="row">
           <div className="col m2 offset-m2">
             <Link to={"/"} className="btn green">

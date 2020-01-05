@@ -28,13 +28,16 @@ class ExpenseView extends Component {
             <span className="card-title">{current_expense.description}</span>
             <p>{current_expense.amount}</p>
             <p>{current_expense.note}</p>
-            <p>Created On: {moment(current_expense.created_at).format("MMMM Do, YYYY")}</p>
+            <p>
+              Created On:{" "}
+              {moment(current_expense.created_at).format("MMMM Do, YYYY")}
+            </p>
           </div>
         </div>
         <div className="row">
-          <div className="col m4 offset-m4">
+          <div className="col m2 offset-m7">
             <div className="row">
-              <div className="col m4 offset-m2">
+              <div className="col m6 right-align">
                 <Modal
                   actions={[
                     <div className="row">
@@ -69,8 +72,8 @@ class ExpenseView extends Component {
                   fixedFooter={false}
                   id="modal-0"
                   trigger={
-                    <Button node="button" className="btn red white-text">
-                      Delete
+                    <Button node="button" className="btn red btn-delete white-text">
+                      <i class="material-icons">delete</i>
                     </Button>
                   }
                 >
@@ -88,12 +91,12 @@ class ExpenseView extends Component {
                   </div>
                 </Modal>
               </div>
-              <div className="col m4">
+              <div className="col m6 right-align">
                 <Link
                   to={`/expenses/edit/${current_expense.id}`}
                   className="btn btn green btn-edit"
                 >
-                  Edit
+                  <i class="material-icons">edit</i>
                 </Link>
               </div>
             </div>
@@ -108,7 +111,7 @@ class ExpenseView extends Component {
 
     return (
       <div>
-        <div className="row">
+        <div className="row mt-50">
           <div className="col m2 offset-m2">
             <Link to={"/expenses"} className="btn green">
               <i className="material-icons custom-icon">arrow_back</i>

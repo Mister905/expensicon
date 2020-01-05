@@ -8,7 +8,6 @@ import App from "./App";
 import "materialize-css/dist/css/materialize.min.css";
 import "./assets/scss/index.scss";
 import reducers from "./reducers";
-import { firebase } from "./firebase/firebase";
 import { createBrowserHistory } from 'history';
 import { login, logout } from './actions/auth';
 
@@ -29,17 +28,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
-
-try {
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      store.dispatch(login(user.uid));
-      history.push('/expenses');
-    } else {
-      store.dispatch(logout());
-      history.push('/');
-    }
-  });
-} catch (error) {
-  console.log(error);
-}

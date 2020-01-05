@@ -110,7 +110,7 @@ class ExpenseEdit extends Component {
     const { id } = this.props.match.params;
     const { loading_current_expense } = this.props.expenses;
     return (
-      <div>
+      <div className="mt-50">
         <div className="row">
           <div className="col m2 offset-m2">
             <Link to={`/expenses/${id}`} className="btn green">

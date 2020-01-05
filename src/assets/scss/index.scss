@@ -1,7 +1,6 @@
 @import "../../components/expenses/expense_create/ExpenseCreate.scss";
 @import "../../components/expenses/expense_edit/ExpenseEdit.scss";
 @import "../../components/layout/header/Header.scss";
-@import "../../components/layout/help/Help.scss";
 @import "../../components/layout/not_found/NotFound.scss";
 @import "../../components/expenses/expense_list/ExpenseList.scss";
 @import "../../components/utils/single_date_input/SingleDateInput.scss";
@@ -9,6 +8,7 @@
 @import "../../components/filters/expense_filters/ExpenseFilters.scss";
 @import "../../components/filters/text_search_filter/TextSearchFilter.scss";
 @import "../../components/layout/landing/Landing.scss";
+@import "../../components/expenses/expense_view/ExpenseView.scss";
 
 .custom-icon {
     vertical-align: bottom;
@@ -37,10 +37,6 @@
 .component-heading {
     font-size: 2rem;
     font-weight: 600;
-}
-
-.btn-edit {
-    min-width: 80px !important;
 }
 
 .update-icon {

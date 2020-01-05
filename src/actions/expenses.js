@@ -10,11 +10,12 @@ import moment from "moment";
 import database from "../firebase/firebase";
 import currency from "currency.js";
 
-export const get_expenses = filters => async dispatch => {
+export const get_expenses = filters => async (dispatch, getState) => {
+  const { uid } = getState().auth;
   const { search_text, sort_by, start_date, end_date } = filters;
 
   const response = await database
-    .ref("expenses")
+    .ref(`users/${uid}/expenses`)
     .once("value")
     .then(snapshot => {
       const expenses = [];
@@ -73,7 +74,11 @@ export const get_expense = expense_id => ({
   payload: expense_id
 });
 
-export const create_expense = (form_values, history) => async dispatch => {
+export const create_expense = (form_values, history) => async (
+  dispatch,
+  getState
+) => {
+  const { uid } = getState().auth;
   const { description, amount, note, created_at } = form_values;
 
   const created_at_timestamp = created_at.valueOf();
@@ -83,7 +88,7 @@ export const create_expense = (form_values, history) => async dispatch => {
     created_at: created_at_timestamp
   };
 
-  const res = await database.ref("expenses").push(new_expense);
+  const res = await database.ref(`users/${uid}/expenses`).push(new_expense);
 
   const { key } = res.ref;
 
@@ -94,11 +99,11 @@ export const create_expense = (form_values, history) => async dispatch => {
   history.push("/");
 };
 
-export const update_expense = (
-  expense_id,
-  form_values,
-  history
-) => async dispatch => {
+export const update_expense = (expense_id, form_values, history) => async (
+  dispatch,
+  getState
+) => {
+  const { uid } = getState().auth;
   const { created_at } = form_values;
 
   const created_at_timestamp = created_at.valueOf();
@@ -106,7 +111,7 @@ export const update_expense = (
   const updated_values = { ...form_values, created_at: created_at_timestamp };
 
   const res = await database
-    .ref(`expenses/${expense_id}`)
+    .ref(`users/${uid}/expenses/${expense_id}`)
     .update(updated_values, error => {
       console.log(error);
     });
@@ -118,8 +123,9 @@ export const update_expense = (
   history.push(`/expenses/${expense_id}`);
 };
 
-export const delete_expense = (expense_id, history) => async dispatch => {
-  const res = await database.ref(`expenses/${expense_id}`).remove();
+export const delete_expense = (expense_id, history) => async (dispatch, getState) => {
+  const { uid } = getState().auth;
+  const res = await database.ref(`users/${uid}/expenses/${expense_id}`).remove();
   dispatch({ type: DELETE_EXPENSE, payload: expense_id });
   history.push("/");
 };

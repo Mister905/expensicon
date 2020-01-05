@@ -5,7 +5,7 @@ import ExpenseFilters from "../../filters/expense_filters/ExpenseFilters";
 class ExpenseDashboard extends Component {
   render() {
     return (
-      <div>
+      <div className="mt-50">
         <div className="row">
           <div className="col m3 offset-m1">
             <ExpenseFilters />
