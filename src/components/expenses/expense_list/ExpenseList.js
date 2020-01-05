@@ -14,7 +14,6 @@ class ExpenseList extends Component {
 
   componentDidUpdate = prevProps => {
     if (prevProps.filters !== this.props.filters) {
-      console.log('derp')
       const { filters } = this.props;
       this.props.get_expenses(filters);
     }
@@ -38,11 +37,11 @@ class ExpenseList extends Component {
             <div key={expense.id} className="row">
               <div className="col m8 offset-m2 card">
                 <Link to={`/expenses/${expense.id}`}>
-                  <span className="card-title">{expense.description}</span>
+                  <span className="card-title expenses-title">{expense.description}</span>
                 </Link>
-                <p>{expense.amount}</p>
+                <p className="expense-list-amount">{expense.amount}</p>
                 <p>{expense.note}</p>
-                <p>{moment(expense.created_at).format("MMMM Do, YYYY")}</p>
+                <p className="expense-list-created">{moment(expense.created_at).format("MMMM Do, YYYY")}</p>
               </div>
             </div>
           );

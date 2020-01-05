@@ -25,10 +25,17 @@ class ExpenseView extends Component {
       <div>
         <div className="row">
           <div className="col m6 offset-m3 card">
-            <span className="card-title">{current_expense.description}</span>
-            <p>{current_expense.amount}</p>
-            <p>{current_expense.note}</p>
-            <p>
+            <div className="card-title expenses-title mt-25">
+              {current_expense.description}
+            </div>
+            <p className="expense-list-amount">{current_expense.amount}</p>
+            <div className="row">
+              <div className="col m8 offset-m2">
+                <p>{current_expense.note}</p>
+              </div>
+            </div>
+
+            <p className="expense-list-created">
               Created On:{" "}
               {moment(current_expense.created_at).format("MMMM Do, YYYY")}
             </p>
@@ -50,7 +57,7 @@ class ExpenseView extends Component {
                               node="button"
                               className="btn green white-text"
                             >
-                              Close
+                              Cancel
                             </Button>
                           </div>
                           <div className="col m6">
@@ -61,7 +68,7 @@ class ExpenseView extends Component {
                               className="btn btn-modal-delete red white-text"
                               onClick={this.handle_delete}
                             >
-                              Delete
+                              Confirm
                             </Button>
                           </div>
                         </div>
@@ -72,19 +79,22 @@ class ExpenseView extends Component {
                   fixedFooter={false}
                   id="modal-0"
                   trigger={
-                    <Button node="button" className="btn red btn-delete white-text">
-                      <i class="material-icons">delete</i>
+                    <Button
+                      node="button"
+                      className="btn red btn-delete white-text"
+                    >
+                      <i className="material-icons">delete</i>
                     </Button>
                   }
                 >
                   <div className="row">
                     <div className="col m12 center-align">
-                      <h1>Delete Record?</h1>
+                      <div className="delete-record-heading green-text">Delete Record?</div>
                     </div>
                   </div>
                   <div className="row">
                     <div className="col m12 center-align">
-                      <p>
+                      <p className="confirmation-message">
                         Are you sure you want to proceed with record deletion?
                       </p>
                     </div>
@@ -96,7 +106,7 @@ class ExpenseView extends Component {
                   to={`/expenses/edit/${current_expense.id}`}
                   className="btn btn green btn-edit"
                 >
-                  <i class="material-icons">edit</i>
+                  <i className="material-icons">edit</i>
                 </Link>
               </div>
             </div>

@@ -11,34 +11,51 @@
 @import "../../components/expenses/expense_view/ExpenseView.scss";
 
 .custom-icon {
-    vertical-align: bottom;
+  vertical-align: bottom;
 }
 
 .mt-25 {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 
 .mt-50 {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .error-helper {
-    color: #F44336 !important
+  color: #f44336 !important;
 }
 
 .error-label {
-    color: #F44336 !important
+  color: #f44336 !important;
 }
 
 .custom-container {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .component-heading {
-    font-size: 2rem;
-    font-weight: 600;
+  font-size: 3rem;
+  font-weight: 600;
 }
 
 .update-icon {
-    margin-left: 5px;
+  margin-left: 5px;
+}
+
+.expenses-title {
+  color: #26a69a !important;
+  font-weight: 400 !important;
+}
+
+.expense-list-amount {
+    font-size: 1.2rem;
+}
+
+.expense-list-created {
+    font-weight: 600;
+}
+
+.green-text {
+    color: #26a69a !important;
 }

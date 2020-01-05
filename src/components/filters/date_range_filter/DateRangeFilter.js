@@ -16,7 +16,7 @@ class DateRangeFilter extends Component {
       <Form>
         <div className="row">
           <div className="input-field col m10 offset-m2">
-            <span className="custom-label">Date Range</span>
+            <span className="custom-label date-range-label">Date Range</span>
             <Field
               name="date_range_filter"
               component={DateRangeInput}
