@@ -5,7 +5,6 @@ import {
   DELETE_EXPENSE,
   GET_EXPENSE
 } from "./types";
-import uuid from "uuid";
 import moment from "moment";
 import database from "../firebase/firebase";
 import currency from "currency.js";
@@ -123,9 +122,14 @@ export const update_expense = (expense_id, form_values, history) => async (
   history.push(`/expenses/${expense_id}`);
 };
 
-export const delete_expense = (expense_id, history) => async (dispatch, getState) => {
+export const delete_expense = (expense_id, history) => async (
+  dispatch,
+  getState
+) => {
   const { uid } = getState().auth;
-  const res = await database.ref(`users/${uid}/expenses/${expense_id}`).remove();
+  const res = await database
+    .ref(`users/${uid}/expenses/${expense_id}`)
+    .remove();
   dispatch({ type: DELETE_EXPENSE, payload: expense_id });
   history.push("/");
 };

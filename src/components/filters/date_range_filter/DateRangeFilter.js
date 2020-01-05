@@ -3,7 +3,11 @@ import DateRangeInput from "../../utils/date_range_input/DateRangeInput";
 import { withFormik, Form, Field } from "formik";
 import { connect } from "react-redux";
 import moment from "moment";
-import { set_start_date, set_end_date } from "../../../actions/filters";
+import {
+  set_start_date,
+  set_end_date,
+  clear_date_filter
+} from "../../../actions/filters";
 
 class DateRangeFilter extends Component {
   render() {
@@ -35,8 +39,15 @@ const Formik = withFormik({
   },
   handleSubmit(values, props) {
     const { start_date, end_date } = values;
-    props.props.set_start_date(start_date);
-    props.props.set_end_date(end_date);
+    if (!start_date && !end_date) {
+      props.props.clear_date_filter();
+    } else {
+      if (props.props.filters.start_date !== start_date) {
+        props.props.set_start_date(start_date);
+      } else {
+        props.props.set_end_date(end_date);
+      }
+    }
   }
 })(DateRangeFilter);
 
@@ -46,5 +57,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   set_start_date,
-  set_end_date
+  set_end_date,
+  clear_date_filter
 })(Formik);

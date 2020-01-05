@@ -8,5 +8,6 @@ export const SET_START_DATE = 'SET_START_DATE';
 export const SET_END_DATE = 'SET_END_DATE';
 export const GET_EXPENSES = 'GET_EXPENSES';
 export const GET_EXPENSE = 'GET_EXPENSE';
+export const CLEAR_DATE_FILTER = 'CLEAR_DATE_FILTER';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';

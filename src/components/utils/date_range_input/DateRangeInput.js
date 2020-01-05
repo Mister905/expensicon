@@ -12,7 +12,10 @@ class DateRangeInput extends Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if ((prevState.start_date !== this.state.start_date) || (prevState.end_date !== this.state.end_date)) {
+    if (
+      prevState.start_date !== this.state.start_date ||
+      prevState.end_date !== this.state.end_date
+    ) {
       this.props.form.handleSubmit();
     }
   };

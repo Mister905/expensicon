@@ -3,15 +3,16 @@ import {
   SORT_BY_AMOUNT,
   SORT_BY_DATE,
   SET_START_DATE,
-  SET_END_DATE
+  SET_END_DATE,
+  CLEAR_DATE_FILTER
 } from "../actions/types";
-import moment from 'moment';
+import moment from "moment";
 
 const INITIAL_STATE = {
   search_text: "",
   sort_by: "date",
-  start_date: moment().startOf('month'),
-  end_date: moment().endOf('month')
+  start_date: moment().startOf("month"),
+  end_date: moment().endOf("month")
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -42,6 +43,12 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         end_date: payload
+      };
+    case CLEAR_DATE_FILTER:
+      return {
+        ...state,
+        start_date: null,
+        end_date: null
       };
     default:
       return state;

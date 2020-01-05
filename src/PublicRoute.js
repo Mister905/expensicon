@@ -3,14 +3,14 @@ import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
 export const PublicRoute = ({
-  isAuthenticated,
+  is_authenticated,
   component: Component,
   ...rest
 }) => (
   <Route
     {...rest}
     component={props =>
-      isAuthenticated ? (
+      is_authenticated ? (
         <div>
           <Redirect to="/expenses" />
         </div>
@@ -22,7 +22,7 @@ export const PublicRoute = ({
 );
 
 const mapStateToProps = state => ({
-  isAuthenticated: !!state.auth.uid
+  is_authenticated: !!state.auth.uid
 });
 
 export default connect(mapStateToProps)(PublicRoute);

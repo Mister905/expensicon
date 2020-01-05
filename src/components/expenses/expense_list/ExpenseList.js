@@ -14,6 +14,7 @@ class ExpenseList extends Component {
 
   componentDidUpdate = prevProps => {
     if (prevProps.filters !== this.props.filters) {
+      console.log('derp')
       const { filters } = this.props;
       this.props.get_expenses(filters);
     }

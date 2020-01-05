@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
-import { SingleDatePicker } from "react-dates";
+import { SingleDatePicker, isInclusivelyBeforeDay } from "react-dates";
 import moment from "moment";
 
 class SingleDateInput extends Component {
@@ -52,7 +52,7 @@ class SingleDateInput extends Component {
           daySize={50}
           withPortal={true}
           numberOfMonths={1}
-          isOutsideRange={() => false}
+          isOutsideRange={day => !isInclusivelyBeforeDay(day, moment())}
         />
       </div>
     );
